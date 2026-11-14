@@ -1,0 +1,126 @@
+<!DOCTYPE html>
+<html lang="zh">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>存而不论 旧章</title>
+  <style>
+    * { box-sizing: border-box; }
+    body { margin: 0; font-family: system-ui, -apple-system, "Segoe UI", sans-serif; background: #f7f7f7; color: #222; }
+    .topbar { position: sticky; top: 0; z-index: 10; display: flex; align-items: center; gap: 12px; padding: 10px 16px; background: rgba(255,255,255,.9); backdrop-filter: blur(8px); border-bottom: 1px solid #e5e5e5; }
+    .topbar button, .topbar a { padding: 6px 14px; font-size: 14px; border: 1px solid #ccc; border-radius: 6px; background: #fff; cursor: pointer; text-decoration: none; color: #222; }
+    .topbar .title { font-weight: 600; font-size: 15px; flex: 1; }
+    .book-header { max-width: 720px; margin: 0 auto; padding: 32px 20px 16px; display: flex; flex-direction: column; align-items: center; text-align: center; gap: 16px; }
+    .book-header .cover { width: 200px; height: 266px; border-radius: 12px; background: #5b6abf; color: #fff; display: flex; justify-content: center; align-items: center; font-size: 16px; box-shadow: 0 8px 24px rgba(0,0,0,.15); overflow: hidden; }
+    .book-header .cover img { width: 100%; height: 100%; object-fit: cover; }
+    .book-header .info h1 { margin: 0 0 8px; font-size: 24px; }
+    .book-header .info p { margin: 0; font-size: 14px; color: #777; }
+    .layout { display: flex; max-width: 1100px; margin: 0 auto; }
+    #toc { width: 240px; flex-shrink: 0; padding: 16px 8px 80px; border-right: 1px solid #e5e5e5; position: sticky; top: 49px; height: calc(100vh - 49px); overflow-y: auto; background: #fafafa; }
+    #toc h3 { margin: 0 0 10px; padding: 0 10px; font-size: 13px; color: #888; font-weight: 500; }
+    #toc a { display: block; padding: 8px 10px; font-size: 14px; color: #333; text-decoration: none; border-radius: 6px; line-height: 1.4; }
+    #toc a:hover { background: #eee; }
+    #toc a.active { background: #333; color: #fff; }
+    #content { flex: 1; min-width: 0; padding: 32px 24px 120px; line-height: 1.9; font-size: 17px; }
+    #content h1 { font-size: 22px; margin: 48px 0 20px; padding-top: 8px; }
+    #content h1:first-child { margin-top: 0; }
+    /* 这里就是自动空两格的魔法 👇 */
+    #content p { margin: 0 0 1.2em; text-indent: 2em; }
+    @media (max-width: 720px) {
+      #toc { position: fixed; left: 0; top: 49px; height: calc(100vh - 49px); z-index: 9; transform: translateX(-100%); transition: transform .25s; box-shadow: 2px 0 12px rgba(0,0,0,.1); width: 260px; }
+      #toc.open { transform: translateX(0); }
+      #content { padding: 24px 16px 120px; }
+      .book-header { padding: 24px 16px 16px; }
+      .book-header .cover { width: 160px; height: 213px; }
+    }
+  </style>
+</head>
+<body>
+  <div class="topbar">
+    <a href="index.html">← 书架</a>
+    <button onclick="toggleToc()">目录</button>
+    <span class="title" id="bookTitle">存而不论 旧章</span>
+    <button onclick="saveBookmark()">加书签</button>
+  </div>
+  <div class="book-header">
+    <div class="cover" style="background:#5b6abf;">封面</div>
+    <div class="info">
+      <h1>存而不论 旧章</h1>
+      <p>作者：cn岷蓝ミンラン · 状态：连载中</p>
+    </div>
+  </div>
+  <div class="layout">
+    <nav id="toc">
+      <h3>目录</h3>
+    </nav>
+    <main id="content">
+      <!-- 👇 你的正文从这里开始 👇 -->
+      <h1>第一章 倒带</h1>
+      <p>十二月初的阜新，天灰蒙蒙地泛着蓝，日光白得发虚，不到四点钟，那点微弱的光晕就贴着西边的矸子山往下坠了。干冷的风从窗缝里挤进来，带着细碎的哨音。</p>
+      <p>苗婉珍瘫在沙发上，旧棉袄滑落了一半。屋里一半暗淡，一半从窗户散开低饱和的光，晕向屋子深处。暖气片微微发热，贴着墙壁的老电视机屏幕惨白的光打在她有些许苍白的脸上。</p>
+      <p>录像机“咔哒”一声，自动倒带，重新播放。</p>
+      <p>三天前的十字路口，交通灯坏了。湛承安穿着厚重的交警皮大衣，在灰蒙蒙的充满雪花噪点的画面中心打着手势。紧接着，一辆像野兽一样的出租车从边缘闯入，画面剧烈晃动，屏幕瞬间花了。</p>
+      <p>她没有任何反应，一直盯着屏幕中心。这一切绝对不能忘记，只有一秒记不清也绝对不能原谅，绝对，绝对是背叛啊，她这样想着。</p>
+      <p>胃里忽然一阵翻江倒海的恶心。她猛地蜷缩起来，捂住嘴，干呕了两声。老家属楼里寂静无声，这干呕的声音被放得极大。</p>
+      <p>估算起来有一个半月了。她还没去医院确认过，但她知道。是那个每天早上出门前会把她冻僵的手揣进自己怀里暖热的人，留下的最珍贵的遗物。</p>
+      <p>茶几上，一个玻璃杯下压着一张绿色的邮政汇款单，边缘被穿堂风吹得“哗啦”作响。足足一万五。今天刚送到，她还没去取钱。</p>
+      <p>她能想到最好的词也许就是被抛弃的富家女吧，每个月一万五，在这个城市足够买个高档房子，顿顿吃漂亮饭。可她偏偏在这个四处漏风的旧楼里挨着，她害怕流言蜚语，宁可把钱藏起来。湛承安懂她，他每天下班脱下那身带着寒气的大衣，就会蹲在窗台边，把漏风的地方糊得严严实实。他什么都不问，只是用那双热乎乎的大手把她从里到外焐透。</p>
+      <p>现在，胃里的恶心退下去了，取而代之的是小腹深处那种隐隐的、往下坠的冰冷。</p>
+      <p>她调整了一下坐姿，盯着屏幕上重新播放的录像，反反复复地播放，倒带，再播放，倒带。</p>
+      <p>她盯着电视里的他，如果这个漏风的屋子、桌上那笔能砸死人的巨款、甚至她自己这副躯壳都是一场梦该多好呢，如果从未存在过就好了。那个带给她体温的人，此刻被冰冷冷地停在太平间里；而那个和他流着同样的血液的小东西，正在她这个像个冰窖一样的身体里，一点点变冷。</p>
+      <!-- 👆 正文结束 👆 -->
+    </main>
+  </div>
+  <script>
+    if (sessionStorage.getItem('loggedIn') !== '1') { location.href = 'index.html'; }
+    // 自动生成目录
+    const headings = document.querySelectorAll('#content h1, #content h2');
+    const toc = document.getElementById('toc');
+    headings.forEach((h, i) => {
+      const id = 'sec-' + i;
+      h.id = id;
+      const a = document.createElement('a');
+      a.href = '#' + id;
+      a.textContent = h.textContent;
+      a.dataset.target = id;
+      a.addEventListener('click', e => {
+        e.preventDefault();
+        document.getElementById(id).scrollIntoView({ behavior: 'smooth' });
+        if (window.innerWidth <= 720) toc.classList.remove('open');
+      });
+      toc.appendChild(a);
+    });
+    // 滚动高亮
+    function highlightToc() {
+      const links = document.querySelectorAll('#toc a');
+      let current = null;
+      links.forEach(a => {
+        const el = document.getElementById(a.dataset.target);
+        if (el && el.getBoundingClientRect().top <= 100) current = a;
+      });
+      links.forEach(a => a.classList.remove('active'));
+      if (current) current.classList.add('active');
+    }
+    window.addEventListener('scroll', highlightToc);
+    highlightToc();
+    // 书签
+    const BOOK_KEY = 'bookmark_book1';
+    function saveBookmark() {
+      const links = document.querySelectorAll('#toc a');
+      let current = null;
+      links.forEach(a => {
+        const el = document.getElementById(a.dataset.target);
+        if (el && el.getBoundingClientRect().top <= 100) current = a;
+      });
+      if (current) { localStorage.setItem(BOOK_KEY, current.dataset.target); alert('已保存书签：' + current.textContent); } 
+      else { alert('还没开始读呢'); }
+    }
+    function restoreBookmark() {
+      const saved = localStorage.getItem(BOOK_KEY);
+      if (saved) { const el = document.getElementById(saved); if (el) setTimeout(() => el.scrollIntoView({ behavior: 'auto' }), 50); }
+    }
+    restoreBookmark();
+    function toggleToc() { document.getElementById('toc').classList.toggle('open'); }
+  </script>
+</body>
+</html>
